@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menù Pizzeria – Circolo Ufficiali Marina Militare Brindisi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1a2744;--gold:#c8a96e;--red:#c0392b;--light-gold:#e8d9b8;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f0ebe0;font-family:'Cormorant Garamond',serif;color:var(--navy);padding-bottom:100px;}
+.page{max-width:680px;margin:0 auto;}
+.header{background:linear-gradient(160deg,#0d1a2e,#1a2744);text-align:center;padding:40px 30px 34px;position:relative;}
+.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#c8a96e,transparent);}
+.anchor{font-size:2.4rem;display:block;margin-bottom:12px;}
+.header h1{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.2rem,3.5vw,1.7rem);color:var(--light-gold);line-height:1.35;}
+.header h2{font-size:clamp(0.85rem,2.5vw,1rem);color:var(--gold);font-weight:300;letter-spacing:0.2em;text-transform:uppercase;margin-top:8px;}
+.sezione{padding:0 16px;margin-top:24px;}
+.sezione-title{font-family:'Playfair Display',serif;font-size:clamp(1rem,3vw,1.3rem);text-align:center;letter-spacing:0.12em;text-transform:uppercase;padding:12px 20px;margin-bottom:14px;border-radius:10px;color:white;font-weight:700;border:3px solid rgba(255,255,255,0.25);}
+.t-red{background:linear-gradient(135deg,#c0392b,#8e1b2a);box-shadow:0 4px 16px rgba(155,35,53,0.4);}
+.t-navy{background:linear-gradient(135deg,#1a2744,#0d1a2e);box-shadow:0 4px 16px rgba(26,39,68,0.4);}
+.t-slate{background:linear-gradient(135deg,#4a5568,#2d3748);box-shadow:0 4px 16px rgba(74,85,104,0.4);}
+.tendina{background:white;border-radius:12px;margin-bottom:10px;overflow:hidden;box-shadow:0 3px 14px rgba(26,39,68,0.08);}
+.tendina-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;cursor:pointer;user-select:none;}
+.ph-red{background:linear-gradient(135deg,#c0392b,#8e1b2a);}
+.ph-navy{background:linear-gradient(135deg,#1a2744,#0d1a2e);}
+.ph-slate{background:linear-gradient(135deg,#4a5568,#2d3748);}
+.tendina-titolo{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:white;}
+.tendina-ing{font-size:0.8rem;font-style:italic;font-weight:300;opacity:0.85;text-transform:none;letter-spacing:0;margin-top:3px;color:rgba(255,255,255,0.85);}
+.tendina-left{display:flex;flex-direction:column;}
+.tendina-freccia{color:white;font-size:1.1rem;transition:transform 0.3s;flex-shrink:0;}
+.tendina.aperta .tendina-freccia{transform:rotate(180deg);}
+.tendina-body{max-height:0;overflow:hidden;transition:max-height 0.35s ease;}
+.tendina.aperta .tendina-body{max-height:200px;}
+.tendina-content{padding:12px 18px 14px;font-size:1.05rem;color:#3a4a5a;font-style:italic;line-height:1.6;border-top:1px solid #f0ebe0;}
+.nota{margin:20px 16px 0;background:var(--navy);color:var(--light-gold);border-radius:8px;padding:14px 20px;font-size:0.82rem;font-style:italic;text-align:center;line-height:1.65;}
+.nota strong{color:var(--gold);font-style:normal;}
+#edit-panel{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:9999;overflow-y:auto;padding:20px 16px;}
+.ep-inner{max-width:560px;margin:0 auto;background:#1a2744;border-radius:16px;padding:26px 22px;color:#e8d9b8;}
+.ep-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.ep-title{font-family:Georgia,serif;font-size:1.1rem;font-weight:700;color:#c8a96e;text-transform:uppercase;}
+.ep-close{background:rgba(255,255,255,0.12);border:none;color:white;border-radius:50%;width:38px;height:38px;font-size:1.3rem;cursor:pointer;}
+#ef{display:flex;flex-direction:column;gap:12px;}
+.ep-btns{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;}
+.ep-apply{flex:1;min-width:130px;background:linear-gradient(135deg,#c8a96e,#a07840);color:#1a0f00;border:none;border-radius:30px;padding:13px;font-size:1rem;font-weight:700;cursor:pointer;}
+.ep-cancel{flex:1;min-width:100px;background:rgba(255,255,255,0.1);color:#e8d9b8;border:1px solid rgba(255,255,255,0.2);border-radius:30px;padding:13px;font-size:1rem;cursor:pointer;}
+#em{margin-top:12px;text-align:center;font-size:0.88rem;min-height:18px;}
+#edit-fab{position:fixed;bottom:20px;right:18px;background:linear-gradient(135deg,#c8a96e,#a07840);color:#1a0f00;border:none;border-radius:50px;padding:12px 22px;font-size:0.88rem;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.3);z-index:1000;text-transform:uppercase;}
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+  body{background:white!important;}
+  .tendina-body{max-height:none!important;overflow:visible!important;}
+  #edit-fab{display:none!important;}
+  #edit-panel{display:none!important;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <span class="anchor">⚓</span>
+    <h1>Circolo Ufficiali Marina Militare<br>Brindisi</h1>
+    <h2>Menù Pizzeria</h2>
+  </div>
+
+  <div class="sezione">
+    <div class="sezione-title t-red">🍅 Pizze Rosse</div>
+    <div class="tendina"><div class="tendina-header ph-red" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Margherita</div><div class="tendina-ing">Pomodoro, mozzarella, basilico</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Pomodoro, mozzarella, basilico</div></div></div>
+    <div class="tendina"><div class="tendina-header ph-red" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Marinara</div><div class="tendina-ing">Pomodoro, aglio, origano</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Pomodoro, aglio, origano</div></div></div>
+    <div class="tendina"><div class="tendina-header ph-red" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Crudo</div><div class="tendina-ing">Pomodoro, mozzarella, crudo, rucola</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Pomodoro, mozzarella, crudo, rucola</div></div></div>
+    <div class="tendina"><div class="tendina-header ph-red" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Cotto e Funghi</div><div class="tendina-ing">Pomodoro, mozzarella, prosciutto cotto e funghi</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Pomodoro, mozzarella, prosciutto cotto e funghi</div></div></div>
+    <div class="tendina"><div class="tendina-header ph-red" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Siciliana</div><div class="tendina-ing">Pomodoro, mozzarella, acciughe e capperi</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Pomodoro, mozzarella, acciughe e capperi</div></div></div>
+    <div class="tendina"><div class="tendina-header ph-red" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Bavarese</div><div class="tendina-ing">Pomodoro, mozzarella, wurstel</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Pomodoro, mozzarella, wurstel</div></div></div>
+    <div class="tendina"><div class="tendina-header ph-red" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Fumé</div><div class="tendina-ing">Pomodoro, mozzarella, scamorza affumicata</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Pomodoro, mozzarella, scamorza affumicata</div></div></div>
+    <div class="tendina"><div class="tendina-header ph-red" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Diavola</div><div class="tendina-ing">Pomodoro, mozzarella, salame piccante</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Pomodoro, mozzarella, salame piccante</div></div></div>
+    <div class="tendina"><div class="tendina-header ph-red" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Capricciosa</div><div class="tendina-ing">Pomodoro, mozzarella, funghi, prosciutto cotto</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Pomodoro, mozzarella, funghi, prosciutto cotto e funghi</div></div></div>
+    <div class="tendina"><div class="tendina-header ph-red" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Nostromo</div><div class="tendina-ing">Pomodoro, mozzarella, tonno, cipolla</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Pomodoro, mozzarella, tonno, cipolla</div></div></div>
+    <div class="tendina"><div class="tendina-header ph-red" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Vegetariana</div><div class="tendina-ing">Pomodoro, mozzarella, melanzane, zucchine, peperoni</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Pomodoro, mozzarella, melanzane, zucchine, peperoni — tutto grigliato</div></div></div>
+    <div class="tendina"><div class="tendina-header ph-red" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">4 Formaggi</div><div class="tendina-ing">Pomodoro, mozzarella, fontina, gorgonzola, grana</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Pomodoro, mozzarella, fontina, gorgonzola, scaglia di grana</div></div></div>
+    <div class="tendina"><div class="tendina-header ph-red" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Valtellina</div><div class="tendina-ing">Pomodoro, mozzarella, bresaola, scaglie di grana</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Pomodoro, mozzarella, bresaola e scaglie di grana</div></div></div>
+  </div>
+
+  <div class="sezione">
+    <div class="sezione-title t-navy">🧀 Pizze Bianche</div>
+    <div class="tendina"><div class="tendina-header ph-navy" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Fumé</div><div class="tendina-ing">Mozzarella, scamorza affumicata</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Mozzarella, scamorza affumicata</div></div></div>
+    <div class="tendina"><div class="tendina-header ph-navy" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Vegetariana</div><div class="tendina-ing">Mozzarella, melanzane, zucchine, peperoni</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Mozzarella, melanzane, zucchine, peperoni — tutto grigliato</div></div></div>
+    <div class="tendina"><div class="tendina-header ph-navy" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">4 Formaggi</div><div class="tendina-ing">Mozzarella, fontina, gorgonzola, scaglia di grana</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Mozzarella, fontina, gorgonzola, scaglia di grana</div></div></div>
+  </div>
+
+  <div class="sezione">
+    <div class="sezione-title t-slate">🫓 Pizze Piadina</div>
+    <div class="tendina"><div class="tendina-header ph-slate" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Fitness</div><div class="tendina-ing">Base piadina, bresaola, rucola, scaglia di grana</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Base piadina con bresaola, rucola e scaglia di grana</div></div></div>
+    <div class="tendina"><div class="tendina-header ph-slate" onclick="toggle(this)"><div class="tendina-left"><div class="tendina-titolo">Crudaiola</div><div class="tendina-ing">Base piadina, pomodori, mozzarella, crudo, rucola</div></div><span class="tendina-freccia">▼</span></div><div class="tendina-body"><div class="tendina-content">Base piadina con pomodori a fette, mozzarella, crudo, rucola</div></div></div>
+  </div>
+
+  <div class="nota"><strong>Su richiesta</strong> disponibile pizza con impasto farina 5 cereali (72h di lievitazione) o integrale, e mozzarella senza lattosio.</div>
+</div>
+
+<div id="edit-panel">
+  <div class="ep-inner">
+    <div class="ep-head"><div class="ep-title">✏️ Modifica Menu Pizze</div><button class="ep-close" onclick="chiudiM()">✕</button></div>
+    <div id="ef"></div>
+    <div class="ep-btns"><button class="ep-apply" onclick="applicaM()">✅ Applica</button><button class="ep-cancel" onclick="chiudiM()">Annulla</button></div>
+    <div id="em"></div>
+  </div>
+</div>
+<button id="edit-fab" onclick="apriM()">✏️ Modifica</button>
+
+<script>
+function toggle(header){header.closest('.tendina').classList.toggle('aperta');}
+var _ei=[];
+function apriM(){
+  _ei=[];var f=document.getElementById('ef');f.innerHTML='';
+  function add(el,label){
+    _ei.push(el);var idx=_ei.length-1;
+    var w=document.createElement('div');w.style.cssText='display:flex;flex-direction:column;gap:4px;';
+    var l=document.createElement('label');l.textContent=label;l.style.cssText='font-size:0.75rem;color:#c8a96e;font-style:italic;';
+    var inp=document.createElement('textarea');inp.value=el.textContent.trim();inp.rows=2;inp.dataset.idx=idx;
+    inp.style.cssText='background:rgba(255,255,255,0.08);border:1px solid rgba(200,169,110,0.3);border-radius:8px;padding:9px 11px;color:#e8d9b8;font-size:0.93rem;resize:vertical;font-family:Georgia,serif;';
+    inp.onfocus=function(){this.style.borderColor='#c8a96e';};inp.onblur=function(){this.style.borderColor='rgba(200,169,110,0.3)';};
+    w.appendChild(l);w.appendChild(inp);f.appendChild(w);
+  }
+  document.querySelectorAll('.tendina-titolo').forEach(function(el){add(el,'🍕 Nome: '+el.textContent.trim());});
+  document.querySelectorAll('.tendina-content').forEach(function(el){
+    var n=(el.closest('.tendina').querySelector('.tendina-titolo')||{textContent:''}).textContent.trim();
+    add(el,'📝 Ingredienti – '+n);
+  });
+  document.getElementById('em').textContent='';
+  document.getElementById('edit-panel').style.display='block';
+  document.body.style.overflow='hidden';
+}
+function applicaM(){
+  document.getElementById('ef').querySelectorAll('textarea').forEach(function(inp){var idx=parseInt(inp.dataset.idx);if(_ei[idx])_ei[idx].textContent=inp.value;});
+  var m=document.getElementById('em');m.textContent='✅ Modifiche applicate!';m.style.color='#7fcf7f';setTimeout(chiudiM,1500);
+}
+function chiudiM(){document.getElementById('edit-panel').style.display='none';document.body.style.overflow='';}
+</script>
+</body>
+</html>
